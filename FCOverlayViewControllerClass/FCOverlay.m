@@ -210,15 +210,11 @@
 {
     // first empty the queued overlays
     [[self sharedInstance] emptyQueue];
-    
+
     // loop to dismiss all overlays
-    while (YES) {
-        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-        
-        if ([keyWindow.rootViewController isKindOfClass:[FCOverlayViewController class]]) {
-            [keyWindow.rootViewController dismissViewControllerAnimated:NO completion:nil];
-        } else {
-            break;
+    for (UIWindow *window in [UIApplication sharedApplication].windows ) {
+        if ([window.rootViewController isKindOfClass:[FCOverlayViewController class]]) {
+            [window.rootViewController dismissViewControllerAnimated:NO completion:nil];
         }
     }
 }
